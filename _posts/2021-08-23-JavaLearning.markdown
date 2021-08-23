@@ -278,36 +278,23 @@ volatile 修饰的成员变量在每次被线程访问时，都强制从共享�
   ％	取余 - 左操作数除以右操作数的余数		B%A等于0<br>
   ++	自增: 操作数的值增加1					B++ 或 ++B 等于 21 <br>
   --	自减: 操作数的值减少1					B-- 或 --B 等于 19 <br>
- <br>
 自增自减（++/--）、前缀自增自减、后缀自增自减了解、区别及应用。<br>
 <br>
 ##关系运算符<br>
  <br>
 ##位运算符<br>
-Java定义了位运算符，应用于整数类型(int)，长整型(long)，短整型(short)，字符型(char)，和字节型(byte)等类型。<br>
+<br>
  <br>
 ##逻辑运算符<br>
-下表列出了逻辑运算符的基本运算，假设布尔变量A为真，变量B为假<br>
-&&	称为逻辑与运算符。当且仅当两个操作数都为真，条件才为真。	（A && B）为假。<br>
-| |	称为逻辑或操作符。如果任何两个操作数任何一个为真，条件为真。	（A | | B）为真。<br>
-！	称为逻辑非运算符。用来反转操作数的逻辑状态。如果条件为true，则逻辑非运算符将得到false。	！（A && B）为真。<br>
  <br>
 短路逻辑运算符<br>
-当使用与逻辑运算符时，在两个操作数都为true时，结果才为true，但是当得到第一个操作为false时，其结果就必定是false，这时候就不会再判断第二个操作了。<br>
+<br>
 ##赋值运算符<br>
  <br>
 ##条件运算符（?:）<br>
-条件运算符也被称为三元运算符。该运算符有3个操作数，并且需要判断布尔表达式的值。该运算符的主要是决定哪个值应该赋值给变量。<br>
-variable x = (expression) ? value if true : value if false<br>
+
 ##instanceof 运算符<br>
-该运算符用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）。<br>
-instanceof运算符使用格式如下：<br>
-( Object reference variable ) instanceof  (class/interface type)<br>
-如果运算符左侧变量所指的对象，是操作符右侧类或接口(class/interface)的一个对象，那么结果为真。<br>
-下面是一个例子：<br>
-String name = "James";<br>
-boolean result = name instanceof String; // 由于 name 是 String 类型，所以返回真<br>
-如果被比较的对象兼容于右侧类型,该运算符仍然返回true。<br>
+
 Java运算符优先级<br>
  <br>
 #Java循环语句<br>
