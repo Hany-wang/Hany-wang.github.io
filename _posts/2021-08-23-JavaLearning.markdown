@@ -1652,3 +1652,4 @@ MVC三层架构
 MVC即 Model 模型、View 视图，及 Controller 控制器。
 MVC是 Model-View-Controller，严格说这三个加起来以后才是三层架构中的View层，也就是说，MVC把三层架构中的View层再度进行了分化
  
+ 
