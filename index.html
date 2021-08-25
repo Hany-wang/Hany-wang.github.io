@@ -1,0 +1,170 @@
+---
+layout: layout
+title: 首页 - Blogway_关注软件开发/互联网技术/大数据技术/敏捷开发/...
+page_type: index
+hot_category: 热门分类
+bloglist: 博文列表
+hot_author: 热门作者
+high_author: 高产作者
+viewnum: 访问量
+blognum: 博文数
+posted_on: 发布于
+posted_by: 作者
+filed_under: 分类
+tags_on: 标签
+read_more: 阅读全文
+viewnum: 阅读
+pre_page: 第
+of_page: 页 共
+end_page: 页
+no_content: 无
+limit_tags: 8
+---
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="articles">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <!-- 分类与年份的下拉框 -->
+                                <div class="sort">
+                                    分类
+                                    <div class="select">
+                                      <span>ALL</span>  
+                                      <ul class="wheel">
+                                        <li><span class="category">ALL</span><span class='pull-right check'>√</span></li>
+                                      </ul>
+                                    </div>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </div>
+                                <div class="time">
+                                    年份
+                                    <div class="select">
+                                        <span class="pull-left">ALL</span> 
+                                        <ul class="wheel">
+                                            <li><span class="year">ALL</span><span class='pull-right check'>√</span></li>
+                                            {% for year in site.data.years %}
+                                            <li><span class="year">{{ year.y }}年度</span><span class='pull-right check'>√</span></li>
+                                            {% endfor %}
+                                        </ul> 
+                                    </div>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <!-- 主页面的博文 -->
+                                <div class="row">
+                                    {% for post in site.posts %}
+                                    <div class="blog">
+                                        <div class="post_time">
+                                            {{ post.date | date: "%Y.%m.%d" }}
+                                        </div>
+                                        <div class="divider-line">
+                                            <img src="/images/circle-black.png">
+                                        </div>
+                                        <div class="post_info">
+                                            {% if post.image != null %}
+                                                <div class="post_pic">
+                                                    <a href="{{ post.url }}">
+                                                        <img src="{{ post.image }}">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            <div class="post_title">
+                                                <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+                                                <p class="post_description">{{ post.description }}</p>
+                                                <div class="post_tag">
+                                                    {% for author in site.authors %}{% if post.author == author.name %}
+                                                        <span class='glyphicon glyphicon-user'>
+                                                            <a href='{{ author.page_path }}'>{{ post.author }}</a>
+                                                        </span>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                    <span class='glyphicon glyphicon-tags kind'>
+                                                        <a href='/categories/{{post.category}}'>{{ post.category }}</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="post_scan">
+                                            阅读量<br/>
+                                            {% if site.leancloud.enable %}
+                                                <span id="{{ post.url }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
+                                                 <span class="leancloud-visitors-count"></span>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>    
+                                    {% endfor %}
+                                </div>
+                                <div class="footer">
+                                    向下滑动加载更多...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 sideBar hidden-sm hidden-xs">
+                <!-- 年度博文列表 -->
+                <div class="list-group" id="year_Blog">
+                    <a href="/yearBlog/index.html" class="list-group-item">
+                        <span class="glyphicon glyphicon-calendar">
+                            年度博文
+                        </span>
+                    </a>
+                    {% assign count = 1 %}
+                    {% for post in site.posts reversed %}
+                    {% assign year = post.date | date: '%Y' %}
+                    {% assign nyear = post.next.date | date: '%Y' %}
+                    {% if year != nyear %}
+                    {% assign count = count | append: ', ' %}
+                    {% assign counts = counts | append: count %}
+                    {% assign count = 1 %}
+                    {% else %}
+                    {% assign count = count | plus: 1 %}
+                    {% endif %}
+                    {% endfor %}
+                    {% assign counts = counts | split: ', ' | reverse %}
+                    {% assign i = 0 %}
+                    {% for post in site.posts  %}
+                    {% assign year =post.date | date: '%Y' %}
+                    {% assign nyear = post.next.date | date: '%Y'  %}
+                    {% if year !=nyear %}
+                    <a href="/yearBlog/index.html?year={{post.date| date: '%Y'}}" class="list-group-item">
+                        {{post.date| date: '%Y'}}年度
+                        <span class="pull-right badge">{{counts[i]}}</span>
+                        <div class="inset-line"></div>
+                    </a>
+                    {% assign i=i | plus: 1 %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- 热门分类 -->
+                <div class="list-group">
+                    <a class="list-group-item">
+                        <span class="glyphicon glyphicon-tags">
+                            热门分类
+                        </span>
+                    </a>
+                    <div id="categorybar-list">
+                    </div>
+                </div>
+                <!-- 人气博主 -->
+                <div class="list-group">
+                    <a class="list-group-item">
+                        <span class="glyphicon glyphicon-heart">
+                            人气博主
+                        </span>
+                    </a>
+                    <div id="my-like">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<link rel="stylesheet" href="/css/index.css">
+<script src="/js/index.js"></script>
